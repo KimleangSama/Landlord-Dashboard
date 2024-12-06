@@ -1,0 +1,68 @@
+name: React CI/CD
+'on':
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - 20.x
+          - 22.x
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+      - name: 'Setup Node.js ${{ matrix.node-version }}'
+        uses: actions/setup-node@v4.1.0
+        with:
+          node-version: '${{ matrix.node-version }}'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build project
+        run: npm run build
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v4.1.0
+        env:
+          SONAR_TOKEN: '${{ secrets.SONAR_TOKEN }}'
+          SONAR_HOST_URL: '${{ secrets.SONAR_HOST_URL }}'
+        with:
+          args: >
+            -Dsonar.projectKey=react-vite-project
+            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
+            -Dsonar.sources=src -Dsonar.tests=src
+            -Dsonar.test.inclusions=src/**/*.test.tsx,src/**/*.test.ts
+            -Dsonar.coverage.exclusions=src/**/*.test.tsx,src/**/*.test.ts,src/main.tsx,src/vite-env.d.ts
+            -Dsonar.exclusions=**/node_modules/**,build/**,dist/**,coverage/**
+      - name: SonarQube Quality Gate check
+        uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: '${{ secrets.SONAR_TOKEN }}'
+          SONAR_HOST_URL: '${{ secrets.SONAR_HOST_URL }}'
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4.4.3
+        with:
+          name: build-files
+          path: build/
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Download build artifacts
+        uses: actions/upload-artifact@v4.4.3
+        with:
+          name: build-files
+          path: build
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.7.2
+        with:
+          folder: build
+          branch: gh-pages
