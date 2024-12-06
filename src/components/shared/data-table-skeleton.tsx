@@ -7,6 +7,8 @@ import {
     TableHeader,
     TableRow
 } from '@/components/ui/table';
+import { ScrollArea } from '@radix-ui/react-scroll-area';
+import { ScrollBar } from '../ui/scroll-area';
 
 type DataTableSkeletonProps = {
     columnCount: number;
@@ -24,7 +26,7 @@ export function DataTableSkeleton({
     showViewOptions = true
 }: DataTableSkeletonProps) {
     return (
-        <div className="w-full space-y-3 overflow-auto">
+        <>
             <div className="flex w-full items-center justify-between space-x-2 overflow-auto p-1">
                 <div className="flex flex-1 items-center space-x-2 space-y-4">
                     {searchableColumnCount > 0
@@ -42,8 +44,8 @@ export function DataTableSkeleton({
                     <Skeleton className="ml-auto hidden h-7 w-[70px] lg:flex" />
                 ) : null}
             </div>
-            <div className="rounded-md border">
-                <Table>
+            <ScrollArea className="h-[calc(90vh-100px)] rounded-md border overflow-auto my-2">
+                <Table className="relative">
                     <TableHeader>
                         {Array.from({ length: 1 }).map((_, i) => (
                             <TableRow key={i} className="hover:bg-transparent">
@@ -67,7 +69,8 @@ export function DataTableSkeleton({
                         ))}
                     </TableBody>
                 </Table>
-            </div>
+                <ScrollBar orientation="horizontal" />
+            </ScrollArea>
             <div className="flex w-full flex-col items-center justify-between gap-4 overflow-auto px-2 py-1 sm:flex-row sm:gap-8">
                 <div className="flex-1">
                     <Skeleton className="h-8 w-40" />
@@ -88,6 +91,6 @@ export function DataTableSkeleton({
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }

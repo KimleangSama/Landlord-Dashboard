@@ -7,7 +7,7 @@ export default function Dashboard() {
             <PageHead title="Dashboard" />
             <DataTableSkeleton
                 columnCount={6}
-                rowCount={20}
+                rowCount={200}
             />
         </div>
     )

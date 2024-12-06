@@ -1,50 +1,47 @@
-# React + TypeScript + Vite
+# Landlord Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Landlord Dashboard** is a software application designed to streamline the management of rental properties. It serves as a centralized platform for landlords, property managers, and tenants to handle various tasks related to room or property rentals efficiently.
 
-Currently, two official plugins are available:
+## Key Features of RRMS
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. **Property Listing and Search**
+    - Allows landlords to list available rooms or properties with details such as location, size, rent, and amenities.
+    - Enables tenants to search for properties based on filters like budget, location, and preferences.
 
-## Expanding the ESLint configuration
+2. **Tenant Management**
+    - Tracks tenant details, rental agreements, and payment history.
+    - Sends reminders for rent due dates or contract renewals.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+3. **Rent Collection and Payments**
+    - Facilitates online payment processing.
+    - Provides invoices and receipts for both landlords and tenants.
 
-- Configure the top-level `parserOptions` property like this:
+4. **Maintenance Requests**
+    - Tenants can report maintenance issues directly through the system.
+    - Landlords or property managers can assign tasks to maintenance personnel and track progress.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+5. **Lease Management**
+    - Manages lease agreements, renewal notices, and termination processes.
+    - Stores all related documents for easy access.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+6. **Financial Reports**
+    - Generates income and expense reports for landlords.
+    - Tracks outstanding payments and overdue rents.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+7. **Communication Portal**
+    - Provides a platform for direct communication between landlords and tenants.
+    - Allows for announcements, notifications, and updates.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+8. **Access Control**
+    - Ensures secure access for landlords, tenants, and administrators with role-based permissions.
+
+## Benefits
+
+- **Efficiency:** Reduces manual effort in managing rental operations.
+- **Transparency:** Provides clear communication and record-keeping for all parties involved.
+- **Convenience:** Accessible online, enabling remote management of properties.
+
+## Technologies Used
+
+- **Frontend:** ReactJS with Typescript
+- **Backend:** Spring Boot with Postgresql

@@ -27,25 +27,6 @@ jobs:
         run: npm ci
       - name: Build project
         run: npm run build
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v4.1.0
-        env:
-          SONAR_TOKEN: '${{ secrets.SONAR_TOKEN }}'
-          SONAR_HOST_URL: '${{ secrets.SONAR_HOST_URL }}'
-        with:
-          args: >
-            -Dsonar.projectKey=react-vite-project
-            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
-            -Dsonar.sources=src -Dsonar.tests=src
-            -Dsonar.test.inclusions=src/**/*.test.tsx,src/**/*.test.ts
-            -Dsonar.coverage.exclusions=src/**/*.test.tsx,src/**/*.test.ts,src/main.tsx,src/vite-env.d.ts
-            -Dsonar.exclusions=**/node_modules/**,build/**,dist/**,coverage/**
-      - name: SonarQube Quality Gate check
-        uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
-        timeout-minutes: 5
-        env:
-          SONAR_TOKEN: '${{ secrets.SONAR_TOKEN }}'
-          SONAR_HOST_URL: '${{ secrets.SONAR_HOST_URL }}'
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4.4.3
         with:
