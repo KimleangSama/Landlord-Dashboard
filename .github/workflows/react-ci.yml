@@ -1,5 +1,5 @@
 name: React CI/CD
-'on':
+"on":
   push:
     branches:
       - main
@@ -18,15 +18,19 @@ jobs:
       - uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
-      - name: 'Setup Node.js ${{ matrix.node-version }}'
+      - name: "Setup Node.js ${{ matrix.node-version }}"
         uses: actions/setup-node@v4.1.0
         with:
-          node-version: '${{ matrix.node-version }}'
+          node-version: "${{ matrix.node-version }}"
           cache: npm
+      - name: Install pnpm
+        run: npm install -g pnpm
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
+      - name: Remove unused imports
+        run: pnpm run lint-fix
       - name: Build project
-        run: npm run build
+        run: pnpm run build
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4.4.3
         with:

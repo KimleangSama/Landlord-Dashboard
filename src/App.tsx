@@ -1,10 +1,27 @@
-import AppProvider from "./providers/app-provider"
-import AppRouter from "./routes"
+import AppProvider from './providers/app-provider'
+import { RouterProvider, createRouter } from '@tanstack/react-router'
 
-function App() {
+// Import the generated route tree
+import { routeTree } from './routeTree.gen'
+import NotFound from './pages/errors/not-found'
+
+// Create a new router instance
+const router = createRouter({
+  routeTree,
+  defaultNotFoundComponent: NotFound
+})
+
+// Register the router instance for type safety
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
+}
+
+function App () {
   return (
     <AppProvider>
-      <AppRouter />
+      <RouterProvider router={router} />
     </AppProvider>
   )
 }

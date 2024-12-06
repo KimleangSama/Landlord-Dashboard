@@ -1,24 +1,18 @@
 import path from 'path'
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import viteReact from '@vitejs/plugin-react'
+import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [viteReact(), TanStackRouterVite()],
   build: {
+    sourcemap: false,
     rollupOptions: {
       output: {
         manualChunks (id) {
           if (id.includes('node_modules')) {
-            try {
-              return id
-                .toString()
-                .split('node_modules/')[1]
-                .split('/')[0]
-                .toString()
-            } catch (e) {
-              console.log(e)
-            }
+            return 'vendor'
           }
         }
       }
