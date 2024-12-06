@@ -9,7 +9,7 @@ import { toTitleCase } from "@/components/utils/title-case"
 export default function Layout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const items = pathname?.split("/")
-        ?.filter((item) => item !== "")
+        ?.filter((item) => item !== "" && item !== "dashboard")
         ?.map((item, index, array) => ({
             title: toTitleCase(item),
             link: `/${array.slice(0, index + 1).join("/")}`,

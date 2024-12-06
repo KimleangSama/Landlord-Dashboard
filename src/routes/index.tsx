@@ -25,11 +25,12 @@ export default function AppRouter() {
                     </Layout>
                 }
             >
-                <Route index element={<Dashboard />} />
+                <Route index element={<Navigate to='/dashboard' />} />
+                <Route path="dashboard" element={<Dashboard />} />
                 <Route path="property" element={<Property />} />
                 
                 <Route path="*" element={<Navigate to="/404" replace />} />
-                <Route path="/404" element={<NotFound />} />
+                <Route path="404" element={<NotFound />} />
             </Route>
         </Routes>
     );
