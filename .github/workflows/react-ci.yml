@@ -65,6 +65,8 @@ jobs:
         run: pnpm run lint-fix
       - name: Build project
         run: pnpm run build
+      - name: List files
+        run: ls -a dist
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
