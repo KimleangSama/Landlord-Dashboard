@@ -41,7 +41,7 @@ jobs:
         with:
           folder: dist
           branch: gh-pages
-          token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
