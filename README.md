@@ -1,6 +1,6 @@
-# Landlord Dashboard
+# RRMS LL Portal
 
-**Landlord Dashboard** is a software application designed to streamline the management of rental properties. It serves as a centralized platform for landlords, property managers, and tenants to handle various tasks related to room or property rentals efficiently.
+**RRMS** is a software application designed to streamline the management of rental properties. It serves as a centralized platform for landlords, property managers, and tenants to handle various tasks related to room or property rentals efficiently.
 
 ## Key Features of RRMS
 
