@@ -39,7 +39,7 @@ export function NavMain ({ items }: { items: NavItem[] }) {
               <SidebarMenuItem>
                 <CollapsibleTrigger asChild>
                   <SidebarMenuButton asChild tooltip={item.title}>
-                    <NavLink to={item.url as any}>
+                    <NavLink to={item.url ? '/404' : undefined}>
                       {item.icon && <item.icon />}
                       <span>{i18n(item.title)}</span>
                       {hasSubItems && (
