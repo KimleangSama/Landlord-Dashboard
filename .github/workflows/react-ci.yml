@@ -36,6 +36,11 @@ jobs:
         with:
           name: build-files
           path: dist/
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.7.2
+        with:
+          folder: dist
+          branch: gh-pages
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
@@ -45,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v4.4.3
         with:
           name: build-files
-          path: dist
+          
       - name: Extract build artifacts
         run: |
           mkdir dist
