@@ -44,6 +44,12 @@ jobs:
         with:
           name: build-files
           path: dist
+      - name: Extract build artifacts
+        run: |
+          mkdir dist
+          tar -xvf ${{ github.workspace }}/dist.tar.gz -C dist
+      - name: List all files
+        run: ls -R .
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.7.2
         with:
