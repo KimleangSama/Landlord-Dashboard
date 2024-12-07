@@ -60,6 +60,12 @@ jobs:
         with:
           # Upload entire repository
           path: "."
+      - name: Install dependencies
+        run: pnpm install
+      - name: Remove unused imports
+        run: pnpm run lint-fix
+      - name: Build project
+        run: pnpm run build
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
