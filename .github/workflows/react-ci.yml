@@ -36,13 +36,12 @@ jobs:
         with:
           name: build-files
           path: dist/
-      - name: Login to GitHub Page
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.7.2
         with:
           folder: dist
           branch: gh-pages
+          token: ${{ secrets.GITHUB_TOKEN }}
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
